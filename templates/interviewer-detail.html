@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interviewer Details - Interview Tracker</title>
+    <link rel="stylesheet" href="/static/css/interviewer-detail.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div>
+                <a href="/interviewers" class="back-link">← Back to Interviewers</a>
+                <h1 id="interviewerName">Loading...</h1>
+                <p id="interviewerCompany" class="company"></p>
+            </div>
+            <nav>
+                <a href="/dashboard">Dashboard</a>
+                <a href="/interviewers">Interviewers</a>
+                <button id="logoutBtn" class="logout-btn">Logout</button>
+            </nav>
+        </header>
+
+        <div class="stats-section">
+            <div class="stat-card">
+                <div class="stat-label">Average Difficulty</div>
+                <div id="avgDifficulty" class="stat-value">-</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Total Reviews</div>
+                <div id="totalReviews" class="stat-value">0</div>
+            </div>
+        </div>
+
+        <!-- Rating Form Section -->
+        <div id="ratingSection" class="rating-section">
+            <h2>Rate This Interviewer</h2>
+            <form id="ratingForm">
+                <div class="form-group">
+                    <label>Difficulty Rating (1 = Easy, 5 = Very Hard) *</label>
+                    <div class="star-rating">
+                        <input type="radio" name="rating" value="5" id="star5" required>
+                        <label for="star5">★</label>
+                        <input type="radio" name="rating" value="4" id="star4">
+                        <label for="star4">★</label>
+                        <input type="radio" name="rating" value="3" id="star3">
+                        <label for="star3">★</label>
+                        <input type="radio" name="rating" value="2" id="star2">
+                        <label for="star2">★</label>
+                        <input type="radio" name="rating" value="1" id="star1">
+                        <label for="star1">★</label>
+                    </div>
+                    <div id="ratingValue" class="rating-value"></div>
+                </div>
+                <div class="form-group">
+                    <label for="comments">Comments (Optional)</label>
+                    <textarea id="comments" rows="4" placeholder="Share your experience with this interviewer..."></textarea>
+                </div>
+                <button type="submit" class="btn-primary">Submit Rating</button>
+            </form>
+            <div id="ratingMessage" class="message"></div>
+        </div>
+
+        <!-- Already Rated Message -->
+        <div id="alreadyRatedSection" class="already-rated" style="display: none;">
+            <p>✓ You have already rated this interviewer</p>
+        </div>
+
+        <!-- Ratings History Section -->
+        <div class="ratings-history">
+            <h2>Ratings & Reviews</h2>
+            <div id="ratingsContainer">
+                <!-- Populated by JavaScript -->
+            </div>
+            <div id="noRatings" class="no-ratings" style="display: none;">
+                <p>No ratings yet. Be the first to rate this interviewer!</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/js/interviewer-detail.js"></script>
+</body>
+</html>

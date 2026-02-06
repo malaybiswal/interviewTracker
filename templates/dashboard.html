@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interview Tracker - Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-briefcase"></i>
+                    <h1>Interview Tracker</h1>
+                </div>
+                <div class="user-menu">
+                    <span class="welcome-text">Welcome back, <span id="username">User</span>!</span>
+                    <button class="logout-btn" onclick="logout()">
+                        <i class="fas fa-sign-out-alt"></i>
+                        Logout
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Stats Cards -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-calendar-check"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3 id="totalInterviews">0</h3>
+                        <p>Total Interviews</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3 id="upcomingInterviews">0</h3>
+                        <p>Upcoming</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3 id="completedInterviews">0</h3>
+                        <p>Completed</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-hourglass-half"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3 id="pendingInterviews">0</h3>
+                        <p>Pending</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Action Button -->
+            <div class="action-section">
+                <button class="add-interview-btn" onclick="addNewInterview()">
+                    <i class="fas fa-plus"></i>
+                    Schedule New Interview
+                </button>
+                <button class="view-table-btn" onclick="viewTableView()">
+                    <i class="fas fa-table"></i>
+                    Table View
+                </button>
+                <button class="view-interviewers-btn" onclick="viewInterviewers()">
+                    <i class="fas fa-users"></i>
+                    Interviewers
+                </button>
+            </div>
+                </button>
+            </div>
+
+            <!-- Interviews Section -->
+            <div class="interviews-section">
+                <h2>Your Interviews</h2>
+                
+                <!-- Loading State -->
+                <div class="loading" id="loading">
+                    <div class="spinner"></div>
+                    <p>Loading your interviews...</p>
+                </div>
+
+                <!-- Empty State -->
+                <div class="empty-state" id="emptyState" style="display: none;">
+                    <div class="empty-icon">
+                        <i class="fas fa-calendar-times"></i>
+                    </div>
+                    <h3>No interviews scheduled yet!</h3>
+                    <p>Looks like your calendar is as empty as a junior developer's GitHub contributions chart 📊</p>
+                    <p>Ready to fill it up with some exciting opportunities?</p>
+                    <button class="add-interview-btn" onclick="addNewInterview()">
+                        <i class="fas fa-plus"></i>
+                        Add Your First Interview
+                    </button>
+                </div>
+
+                <!-- Interviews List -->
+                <div class="interviews-list" id="interviewsList" style="display: none;">
+                    <!-- Active Interviews -->
+                    <div class="interview-category">
+                        <h3><i class="fas fa-clock"></i> Active Interviews</h3>
+                        <div class="interviews-grid" id="upcomingList">
+                            <!-- Dynamic content -->
+                        </div>
+                    </div>
+
+                    <!-- Completed Interviews -->
+                    <div class="interview-category">
+                        <h3><i class="fas fa-check-circle"></i> Completed Interviews</h3>
+                        <div class="interviews-grid" id="pastList">
+                            <!-- Dynamic content -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+</body>
+</html>

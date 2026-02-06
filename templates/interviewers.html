@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interviewers - Interview Tracker</title>
+    <link rel="stylesheet" href="/static/css/interviewers.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Interviewer Database</h1>
+            <nav>
+                <a href="/dashboard">Dashboard</a>
+                <a href="/interviewers" class="active">Interviewers</a>
+                <button id="logoutBtn" class="logout-btn">Logout</button>
+            </nav>
+        </header>
+
+        <div class="controls">
+            <input type="text" id="searchInput" placeholder="Search by name or company..." />
+            <button id="importBtn" class="btn-secondary">Import from Interviews</button>
+            <button id="addInterviewerBtn" class="btn-primary">+ Add Interviewer</button>
+        </div>
+
+        <div id="interviewersTable">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Company</th>
+                        <th>Difficulty Rating</th>
+                        <th>Total Reviews</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="interviewersBody">
+                    <!-- Populated by JavaScript -->
+                </tbody>
+            </table>
+        </div>
+
+        <div id="emptyState" class="empty-state" style="display: none;">
+            <p>No interviewers found. Add one to get started!</p>
+        </div>
+    </div>
+
+    <!-- Add Interviewer Modal -->
+    <div id="addModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Add New Interviewer</h2>
+            <form id="addInterviewerForm">
+                <div class="form-group">
+                    <label for="interviewerName">Name *</label>
+                    <input type="text" id="interviewerName" required />
+                </div>
+                <div class="form-group">
+                    <label for="interviewerCompany">Company *</label>
+                    <input type="text" id="interviewerCompany" required />
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn-secondary" id="cancelBtn">Cancel</button>
+                    <button type="submit" class="btn-primary">Add Interviewer</button>
+                </div>
+            </form>
+            <div id="formMessage" class="message"></div>
+        </div>
+    </div>
+
+    <script src="/static/js/interviewers.js"></script>
+</body>
+</html>

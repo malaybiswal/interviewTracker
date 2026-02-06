@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  interview-tracker:
+    build: .
+    ports:
+      - "5080:5080"
+    environment:
+      - DB_HOST=192.168.1.186
+      - DB_PORT=3306
+      - DB_USER=marisa
+      - DB_PASSWORD=marisa@123
+      - DB_NAME=misc
+      - JWT_SECRET_KEY=asghjas567as
+      - FLASK_ENV=production
+      - FLASK_DEBUG=false
+      - FLASK_HOST=0.0.0.0
+      - FLASK_PORT=5080
+    restart: unless-stopped
+    # If you want to use an .env file instead:
+    # env_file:
+    #   - .env

@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interview Tracker - Interview Details</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/interview-details.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <button class="back-btn" onclick="goBack()">
+                    <i class="fas fa-arrow-left"></i>
+                    Back to Dashboard
+                </button>
+                <div class="logo">
+                    <i class="fas fa-briefcase"></i>
+                    <h1>Interview Details</h1>
+                </div>
+                <div class="spacer"></div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="form-container">
+                <div class="form-header">
+                    <h2 id="formTitle">Schedule New Interview</h2>
+                    <p id="formSubtitle">Fill in the details for your upcoming interview</p>
+                </div>
+
+                <form id="interviewForm" class="interview-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="companyName">Company Name *</label>
+                            <div class="input-wrapper">
+                                <i class="fas fa-building"></i>
+                                <input type="text" id="companyName" name="companyName" placeholder="e.g., Google, Microsoft, Apple" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="jobTitle">Job Title *</label>
+                            <div class="input-wrapper">
+                                <i class="fas fa-briefcase"></i>
+                                <input type="text" id="jobTitle" name="jobTitle" placeholder="e.g., Senior Software Engineer" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="recruiterName">Recruiter Name</label>
+                            <div class="input-wrapper">
+                                <i class="fas fa-user-tie"></i>
+                                <input type="text" id="recruiterName" name="recruiterName" placeholder="e.g., John Smith">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="interviewerName">Interviewer Name</label>
+                            <div class="input-wrapper">
+                                <i class="fas fa-user"></i>
+                                <input type="text" id="interviewerName" name="interviewerName" placeholder="e.g., Jane Doe">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="jobUrl">Job Description Link</label>
+                        <div class="input-wrapper">
+                            <i class="fas fa-link"></i>
+                            <input type="url" id="jobUrl" name="jobUrl" placeholder="https://company.com/jobs/123">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="interviewDate">Interview Date</label>
+                            <div class="input-wrapper">
+                                <i class="fas fa-calendar"></i>
+                                <input type="date" id="interviewDate" name="interviewDate">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="interviewTime">Interview Time</label>
+                            <div class="input-wrapper">
+                                <i class="fas fa-clock"></i>
+                                <input type="time" id="interviewTime" name="interviewTime">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="interviewType">Type of Interview</label>
+                            <div class="input-wrapper">
+                                <i class="fas fa-video"></i>
+                                <select id="interviewType" name="interviewType" onchange="handleInterviewTypeChange()">
+                                    <option value="">Select interview type</option>
+                                    <option value="recruiter">Recruiter</option>
+                                    <option value="coding-phone-screen">Coding Phone Screen</option>
+                                    <option value="systems-phone-screen">Systems Phone Screen</option>
+                                    <option value="hiring-mgr-phone-screen">Hiring Mgr Phone Screen</option>
+                                    <option value="onsite-coding">Onsite Coding</option>
+                                    <option value="onsite-behavioral">Onsite Behavioral</option>
+                                    <option value="onsite-x-functional">Onsite X-Functional</option>
+                                    <option value="onsite-system-design">Onsite System Design</option>
+                                    <option value="onsite-systems">Onsite Systems</option>
+                                    <option value="onsite-recruiter-debrief">Onsite Recruiter Debrief</option>
+                                    <option value="others">Others</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="status">Status</label>
+                            <div class="input-wrapper">
+                                <i class="fas fa-flag"></i>
+                                <select id="status" name="status">
+                                    <option value="Applied">Applied</option>
+                                    <option value="Interviewing">Interviewing</option>
+                                    <option value="Awaiting Decision">Awaiting Decision</option>
+                                    <option value="Offer Received">Offer Received</option>
+                                    <option value="Rejected">Rejected</option>
+                                    <option value="Withdrawn">Withdrawn</option>
+                                    <option value="On Hold">On Hold</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Custom Interview Type (shown when "Others" is selected) -->
+                    <div class="form-group" id="customTypeGroup" style="display: none;">
+                        <label for="customInterviewType">Custom Interview Type</label>
+                        <div class="input-wrapper">
+                            <i class="fas fa-edit"></i>
+                            <input type="text" id="customInterviewType" name="customInterviewType" placeholder="Enter custom interview type">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="comments">Comments</label>
+                        <div class="textarea-wrapper">
+                            <i class="fas fa-comment"></i>
+                            <textarea id="comments" name="comments" placeholder="Any additional comments about the interview..." rows="4"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="notes">Notes</label>
+                        <div class="textarea-wrapper">
+                            <i class="fas fa-sticky-note"></i>
+                            <textarea id="notes" name="notes" placeholder="Personal notes, preparation reminders, etc..." rows="4"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="button" class="cancel-btn" onclick="goBack()">
+                            <i class="fas fa-times"></i>
+                            Cancel
+                        </button>
+                        <button type="button" class="rounds-btn" id="manageRoundsBtn" onclick="goToRounds()" style="display: none;">
+                            <i class="fas fa-list"></i>
+                            Manage Interview Rounds
+                        </button>
+                        <button type="submit" class="save-btn" id="saveBtn">
+                            <span class="btn-text">
+                                <i class="fas fa-save"></i>
+                                Save Interview
+                            </span>
+                            <div class="spinner" id="spinner"></div>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </main>
+    </div>
+
+    <div class="alert" id="alert"></div>
+
+    <script src="{{ url_for('static', filename='js/interview-details.js') }}"></script>
+    <script>
+        // Make handleInterviewTypeChange available globally
+        window.handleInterviewTypeChange = function() {
+            const interviewType = document.getElementById('interviewType').value;
+            const customTypeGroup = document.getElementById('customTypeGroup');
+            const customTypeInput = document.getElementById('customInterviewType');
+            
+            if (interviewType === 'others') {
+                customTypeGroup.style.display = 'block';
+                customTypeInput.required = true;
+            } else {
+                customTypeGroup.style.display = 'none';
+                customTypeInput.required = false;
+                customTypeInput.value = ''; // Clear the custom input
+            }
+        };
+    </script>
+</body>
+</html>

@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interview Tracker - Interview Rounds</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/interview-rounds.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <button class="back-btn" onclick="goBack()">
+                    <i class="fas fa-arrow-left"></i>
+                    Back to Dashboard
+                </button>
+                <div class="logo">
+                    <i class="fas fa-briefcase"></i>
+                    <h1>Interview Rounds</h1>
+                </div>
+                <div class="spacer"></div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Interview Overview -->
+            <div class="interview-overview">
+                <div class="overview-card">
+                    <h2 id="companyJobTitle">Loading...</h2>
+                    <div class="overview-details">
+                        <div class="detail-item">
+                            <i class="fas fa-user-tie"></i>
+                            <span id="recruiterName">-</span>
+                        </div>
+                        <div class="detail-item">
+                            <i class="fas fa-link"></i>
+                            <a id="jobUrl" href="#" target="_blank">Job Posting</a>
+                        </div>
+                        <div class="detail-item">
+                            <i class="fas fa-flag"></i>
+                            <span class="status-badge" id="overallStatus">Applied</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Initial Interview Details (if exists) -->
+            <div class="initial-interview-section" id="initialInterviewSection" style="display: none;">
+                <div class="section-header">
+                    <h3><i class="fas fa-history"></i> Round 1 - Initial Interview</h3>
+                </div>
+                
+                <div class="initial-interview-card">
+                    <div class="interview-details-grid">
+                        <div class="detail-group">
+                            <h4><i class="fas fa-calendar"></i> Interview Date & Time</h4>
+                            <p id="initialDate">Not scheduled</p>
+                        </div>
+                        
+                        <div class="detail-group">
+                            <h4><i class="fas fa-user"></i> Interviewer</h4>
+                            <p id="initialInterviewer">Not specified</p>
+                        </div>
+                        
+                        <div class="detail-group">
+                            <h4><i class="fas fa-video"></i> Interview Type</h4>
+                            <p id="initialType">Not specified</p>
+                        </div>
+                        
+                        <div class="detail-group">
+                            <h4><i class="fas fa-flag"></i> Status</h4>
+                            <span class="status-badge" id="initialStatus">-</span>
+                        </div>
+                    </div>
+                    
+                    <div class="comments-notes-section" id="commentsNotesSection" style="display: none;">
+                        <div class="comments-notes-grid">
+                            <div class="comment-group" id="initialCommentsGroup" style="display: none;">
+                                <h4><i class="fas fa-comment"></i> Comments</h4>
+                                <div class="comment-content" id="initialComments"></div>
+                            </div>
+                            
+                            <div class="notes-group" id="initialNotesGroup" style="display: none;">
+                                <h4><i class="fas fa-sticky-note"></i> Notes</h4>
+                                <div class="notes-content" id="initialNotes"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Existing Rounds -->
+            <div class="rounds-section">
+                <div class="section-header">
+                    <h3><i class="fas fa-list"></i> Additional Interview Rounds</h3>
+                    <button class="add-round-btn" onclick="showAddRoundsModal()">
+                        <i class="fas fa-plus"></i>
+                        Add Rounds
+                    </button>
+                </div>
+                
+                <div class="rounds-list" id="roundsList">
+                    <!-- Rounds will be loaded here -->
+                </div>
+
+                <div class="empty-rounds" id="emptyRounds" style="display: none;">
+                    <div class="empty-icon">
+                        <i class="fas fa-calendar-plus"></i>
+                    </div>
+                    <h3>No interview rounds yet</h3>
+                    <p>Add your first interview round to start tracking the process</p>
+                    <button class="add-round-btn" onclick="showAddRoundsModal()">
+                        <i class="fas fa-plus"></i>
+                        Add First Round
+                    </button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Add Rounds Modal -->
+    <div class="modal" id="addRoundsModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Add Interview Rounds</h3>
+                <button class="close-btn" onclick="closeAddRoundsModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="roundCount">How many rounds would you like to add?</label>
+                    <div class="input-wrapper">
+                        <i class="fas fa-hashtag"></i>
+                        <input type="number" id="roundCount" min="1" max="10" value="1" onchange="generateRoundForms()">
+                    </div>
+                </div>
+
+                <div id="roundForms">
+                    <!-- Round forms will be generated here -->
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button class="cancel-btn" onclick="closeAddRoundsModal()">Cancel</button>
+                <button class="save-btn" onclick="saveRounds()">
+                    <span class="btn-text">Save Rounds</span>
+                    <div class="spinner" id="saveSpinner"></div>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="alert" id="alert"></div>
+
+    <script src="{{ url_for('static', filename='js/interview-rounds.js') }}"></script>
+</body>
+</html>

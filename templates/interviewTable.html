@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interview Tracker - All Interviews</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/interview-table.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <button class="back-btn" onclick="goBack()">
+                    <i class="fas fa-arrow-left"></i>
+                    Back to Dashboard
+                </button>
+                <div class="logo">
+                    <i class="fas fa-table"></i>
+                    <h1>All Interviews</h1>
+                </div>
+                <button class="logout-btn" onclick="logout()">
+                    <i class="fas fa-sign-out-alt"></i>
+                    Logout
+                </button>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="table-container">
+                <table class="interview-table" id="interviewTable">
+                    <thead>
+                        <tr>
+                            <th>Company</th>
+                            <th>Recruiter</th>
+                            <th>JD</th>
+                            <th>Phone Screen</th>
+                            <th>Online Assessment</th>
+                            <th>Phone Screen 2</th>
+                            <th>Onsite</th>
+                            <th>Notes</th>
+                            <th>Comment</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tableBody">
+                        <!-- Rows will be loaded here -->
+                    </tbody>
+                </table>
+
+                <div class="loading" id="loading">
+                    <div class="spinner"></div>
+                    <p>Loading interviews...</p>
+                </div>
+
+                <div class="empty-state" id="emptyState" style="display: none;">
+                    <div class="empty-icon">
+                        <i class="fas fa-inbox"></i>
+                    </div>
+                    <h3>No interviews found</h3>
+                    <p>Start by adding your first interview</p>
+                    <button class="add-btn" onclick="addNewInterview()">
+                        <i class="fas fa-plus"></i>
+                        Add Interview
+                    </button>
+                </div>
+            </div>
+
+            <!-- Legend -->
+            <div class="legend">
+                <h4>Color Legend:</h4>
+                <div class="legend-items">
+                    <div class="legend-item">
+                        <div class="legend-color completed"></div>
+                        <span>Completed (Past)</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color today"></div>
+                        <span>Today</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color upcoming"></div>
+                        <span>Upcoming</span>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <div class="alert" id="alert"></div>
+
+    <script src="{{ url_for('static', filename='js/interview-table.js') }}"></script>
+</body>
+</html>
